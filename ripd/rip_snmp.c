@@ -205,7 +205,7 @@ rip_ifaddr_delete (struct interface *ifp, struct connected *ifc)
   if (! rn)
     return;
   i = rn->info;
-  if (rn && !strncmp(i->name,ifp->name,INTERFACE_NAMSIZ))
+  if (!strncmp(i->name,ifp->name,INTERFACE_NAMSIZ))
     {
       rn->info = NULL;
       route_unlock_node (rn);
