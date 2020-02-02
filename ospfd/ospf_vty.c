@@ -5651,7 +5651,7 @@ DEFUN (ip_ospf_retransmit_interval,
   seconds = strtol (argv[0], NULL, 10);
 
   /* Retransmit Interval range is <3-65535>. */
-  if (seconds < 1 || seconds > 65535)
+  if (seconds < 0 || seconds > 65535)
     {
       vty_out (vty, "Retransmit Interval is invalid%s", VTY_NEWLINE);
       return CMD_WARNING;
@@ -5680,7 +5680,7 @@ DEFUN (ip_ospf_retransmit_interval,
 
 ALIAS (ip_ospf_retransmit_interval,
        ip_ospf_retransmit_interval_cmd,
-       "ip ospf retransmit-interval <1-65535>",
+       "ip ospf retransmit-interval <0-65535>",
        "IP Information\n"
        "OSPF interface commands\n"
        "Time between retransmitting lost link state advertisements\n"
@@ -5688,7 +5688,7 @@ ALIAS (ip_ospf_retransmit_interval,
 
 ALIAS (ip_ospf_retransmit_interval,
        ospf_retransmit_interval_cmd,
-       "ospf retransmit-interval <1-65535>",
+       "ospf retransmit-interval <0-65535>",
        "OSPF interface commands\n"
        "Time between retransmitting lost link state advertisements\n"
        "Seconds\n")
