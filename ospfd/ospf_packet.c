@@ -21,6 +21,8 @@
  */
 
 #include <zebra.h>
+#include <unistd.h>
+
 
 #include "thread.h"
 #include "memory.h"
@@ -500,7 +502,7 @@ ospf_ls_upd_timer (struct thread *thread)
 	    {
 	      struct ospf_lsa *lsa;
 	      
-	      if ((lsa = rn->info) != NULL)
+	      if ((lsa = rn->info) != NULL){
 		/* Don't retransmit an LSA if we received it within
 		  the last RxmtInterval seconds - this is to allow the
 		  neighbour a chance to acknowledge the LSA as it may
@@ -508,9 +510,10 @@ ospf_ls_upd_timer (struct thread *thread)
 		  fired.  This is a small tweak to what is in the RFC,
 		  but it will cut out out a lot of retransmit traffic
 		  - MAG */
-		if (tv_cmp (tv_sub (recent_relative_time (), lsa->tv_recv), 
-			    int2tv (retransmit_interval)) >= 0)
-		  listnode_add (update, rn->info);
+		//if (tv_cmp (tv_sub (recent_relative_time (), lsa->tv_recv), 
+		//	    int2tv (retransmit_interval)) >= 0)
+          usleep(10);
+		  listnode_add (update, rn->info);}
 	    }
 	}
 
